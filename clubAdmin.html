@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مِراس - مسؤول النادي</title>
+  <link rel="stylesheet" href="Style.css">
+  
+  <style>
+  /* كل الأنماط تبدأ بـ .club-dashboard حتى لا تؤثر على الهيدر أو الفوتر أو الصفحات الأخرى */
+ 
+  .club-dashboard {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 34px 24px 60px;
+  }
+ 
+  /* ---------- عنوان الصفحة ---------- */
+  .club-dashboard .page-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 28px;
+    font-size: 30px;
+  }
+ 
+  .club-dashboard .page-title img {
+    height: 34px;
+  }
+ 
+  /* ---------- أقسام الصفحة ---------- */
+  .club-dashboard .section {
+    margin-bottom: 40px;
+  }
+ 
+  .club-dashboard .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+ 
+  .club-dashboard .section-title {
+    margin: 0;
+    font-size: 22px;
+    position: relative;
+    padding-bottom: 8px;
+  }
+ 
+  /* خط ذهبي صغير تحت عنوان القسم */
+  .club-dashboard .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 36px;
+    height: 4px;
+    border-radius: 4px;
+    background-color: var(--gold);
+  }
+ 
+  /* ---------- أزرار ---------- */
+  .club-dashboard .btn {
+    display: inline-block;
+    padding: 9px 22px;
+    border-radius: 999px;
+    background-color: var(--ink);
+    color: var(--beige);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s, color .2s;
+  }
+ 
+  .club-dashboard .btn:hover {
+    background-color: var(--teal);
+    color: var(--ink);
+  }
+ 
+  .club-dashboard .btn-light {
+    background-color: transparent;
+    color: var(--ink);
+    border: 2px solid var(--teal-light);
+  }
+ 
+  .club-dashboard .btn-light:hover {
+    background-color: var(--yellow);
+    color: var(--ink);
+  }
+ 
+  /* ---------- بطاقة عامة (نفس شكل بطاقات الصفحة الرئيسية) ---------- */
+  .club-dashboard .card {
+    background-color: #fff;
+    border-radius: 18px;
+    border-top: 4px solid var(--teal);
+    box-shadow: 0 6px 20px rgba(46, 85, 96, 0.10);
+    padding: 20px;
+  }
+ 
+  /* ---------- القسم أ: نظرة عامة على النادي ---------- */
+  .club-dashboard .overview {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+  }
+ 
+  .club-dashboard .club-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+ 
+  .club-dashboard .club-logo {
+    width: 84px;
+    height: 84px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 3px solid var(--teal-light);
+    background-color: var(--beige);
+    overflow: hidden;
+  }
+ 
+  .club-dashboard .club-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+ 
+  .club-dashboard .label {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--teal);
+  }
+ 
+  .club-dashboard .club-name {
+    margin: 0;
+    font-size: 24px;
+  }
+ 
+  .club-dashboard .stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    border-top-color: var(--gold);
+  }
+ 
+  .club-dashboard .stat-number {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+ 
+  /* ---------- القسم ب: الفرص المنشورة ---------- */
+  .club-dashboard .opportunities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+ 
+  .club-dashboard .opp-card {
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  .club-dashboard .opp-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+ 
+  .club-dashboard .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+ 
+  .club-dashboard .badge-opp {
+    background-color: var(--teal-light);
+    color: var(--ink-dark);
+  }
+ 
+  .club-dashboard .opp-mode {
+    font-size: 13px;
+  }
+ 
+  .club-dashboard .opp-title {
+    margin: 0 0 4px;
+    font-size: 20px;
+  }
+ 
+  .club-dashboard .opp-club {
+    margin: 0 0 12px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--teal);
+  }
+ 
+  .club-dashboard .opp-details {
+    list-style: none;
+    margin: 0 0 14px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 2;
+  }
+ 
+  .club-dashboard .opp-details b {
+    margin-left: 4px;
+  }
+ 
+  .club-dashboard .opp-link {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+ 
+  .club-dashboard .opp-link:hover {
+    color: var(--teal);
+  }
+ 
+  /* الزر يلتصق بأسفل البطاقة لتتساوى البطاقات */
+  .club-dashboard .opp-card .btn {
+    margin-top: auto;
+    text-align: center;
+  }
+ 
+  /* ---------- القسم ج: طلبات الطلاب ---------- */
+  .club-dashboard .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+ 
+  .club-dashboard .badge-member {
+    background-color: var(--teal-light);
+    color: var(--ink-dark);
+  }
+ 
+  .club-dashboard .badge-apply {
+    background-color: var(--gold);
+    color: var(--ink-dark);
+  }
+ 
+  .club-dashboard .app-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+ 
+  /* بطاقة الطلب: الحافة الملونة على اليمين تميّز النوع */
+  .club-dashboard .app-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    background-color: #fff;
+    border-radius: 14px;
+    border-right: 6px solid var(--teal-light);
+    box-shadow: 0 4px 14px rgba(46, 85, 96, 0.08);
+    padding: 14px 18px;
+  }
+ 
+  .club-dashboard .app-row.type-opportunity {
+    border-right-color: var(--gold);
+  }
+ 
+  .club-dashboard .app-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+ 
+  .club-dashboard .app-student {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 500;
+  }
+ 
+  .club-dashboard .app-meta {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--teal);
+  }
+ 
+  .club-dashboard .app-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+ 
+  .club-dashboard .status {
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    background-color: var(--yellow);
+    color: var(--ink-dark);
+  }
+ 
+  /* ---------- حالة عدم وجود بيانات ---------- */
+  .club-dashboard .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 34px 20px;
+    border-radius: 18px;
+    border: 2px dashed var(--teal-light);
+    background-color: var(--header-bg);
+    font-size: 16px;
+    color: var(--ink);
+  }
+ 
+  /* ---------- الجوال ---------- */
+  @media (max-width: 900px) {
+    .club-dashboard .opportunities-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+ 
+  @media (max-width: 800px) {
+    .club-dashboard {
+      padding: 24px 16px 44px;
+    }
+ 
+    .club-dashboard .page-title {
+      font-size: 24px;
+    }
+ 
+    .club-dashboard .overview,
+    .club-dashboard .opportunities-grid {
+      grid-template-columns: 1fr;
+    }
+ 
+    .club-dashboard .club-card {
+      flex-direction: column;
+      text-align: center;
+    }
+ 
+    .club-dashboard .app-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+ 
+    .club-dashboard .app-side {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
+</head>
+<body data-role="club" data-page="home">
+
+  <!-- ===== Club Admin Header ===== -->
+  <header class="header" id="site-header">
+    <a href="clubAdmin.html" class="logo">
+      <img src="logoMeras.jpg" alt="شعار مِراس">
+    </a>
+
+    <nav class="nav">
+      <a href="clubAdmin.html">لوحة التحكم</a>
+      <a href="opportunities.html">إدارة الفرص</a>
+      <a href="applications.html">إدارة الطلبات</a>
+      <a href="posts.html">المنشورات</a>
+      <a href="achievements.html">توثيق الإنجازات</a>
+      <a href="clubInfo.html">معلومات النادي</a>
+      <a href="#" class="logout">تسجيل الخروج</a>
+    </nav>
+  </header>
+
+<main class="page club-dashboard">
+ 
+  <h1 class="page-title">
+    <img src="sunMeras.png" alt="">
+    لوحة تحكم النادي
+  </h1>
+ 
+  <!-- ===== أ. نظرة عامة على النادي ===== -->
+  <section class="section" id="club-overview">
+    <div class="section-head">
+      <h2 class="section-title">نظرة عامة على النادي</h2>
+    </div>
+ 
+    <div class="overview">
+ 
+      <div class="card club-card">
+        <div class="club-logo">
+          <!-- لاحقًا: <img src="شعار النادي" alt="شعار النادي"> -->
+        </div>
+        <div>
+          <p class="label">اسم النادي</p>
+          <!-- لاحقًا: اسم النادي من قاعدة البيانات -->
+          <h3 class="club-name" id="club-name">—</h3>
+        </div>
+      </div>
+ 
+      <div class="card stat-card">
+        <p class="label">عدد الطلاب المنضمين</p>
+        <!-- لاحقًا: عدد أعضاء النادي من قاعدة البيانات -->
+        <p class="stat-number" id="members-count">—</p>
+      </div>
+ 
+    </div>
+  </section>
+ 
+ 
+  <!-- ===== ب. الفرص المنشورة ===== -->
+  <section class="section" id="published-opportunities">
+    <div class="section-head">
+      <h2 class="section-title">الفرص المنشورة</h2>
+    </div>
+ 
+    <div class="opportunities-grid" id="opportunities-grid">
+ 
+      <!-- حالة عدم وجود فرص: احذفيها عندما توجد فرص -->
+      <p class="empty">لم يقم النادي بنشر أي فرص حتى الآن.</p>
+ 
+      <!--
+        قالب بطاقة الفرصة: كرّريه لكل فرصة، واستبدلي "—" بالقيم القادمة من قاعدة البيانات.
+ 
+        <article class="card opp-card">
+          <div class="opp-top">
+            <span class="badge badge-opp">فرصة</span>
+            <span class="opp-mode">—</span>
+          </div>
+          <h3 class="opp-title">—</h3>
+          <p class="opp-club">—</p>
+          <ul class="opp-details">
+            <li><b>التاريخ:</b> —</li>
+            <li><b>الساعات التطوعية:</b> —</li>
+            <li><b>آخر موعد للتسجيل:</b> —</li>
+          </ul>
+          <a href="#" class="opp-link">◄ التفاصيل</a>
+          <a href="#" class="btn">عرض المتقدمين</a>
+        </article>
+      -->
+ 
+    </div>
+  </section>
+ 
+ 
+  <!-- ===== ج. طلبات الطلاب ===== -->
+  <section class="section" id="student-applications">
+    <div class="section-head">
+      <h2 class="section-title">طلبات الطلاب</h2>
+      <a href="applications.html" class="btn btn-light">عرض الكل</a>
+    </div>
+ 
+    <!-- توضيح نوعَي الطلبات -->
+    <div class="legend">
+      <span class="badge badge-member">طلب انضمام للنادي</span>
+      <span class="badge badge-apply">طلب تقديم على فرصة</span>
+    </div>
+ 
+    <div class="app-list" id="applications-preview">
+ 
+      <!-- حالة عدم وجود طلبات: احذفيها عندما توجد طلبات -->
+      <p class="empty">لا توجد طلبات من الطلاب حتى الآن.</p>
+ 
+      <!--
+        قالب طلب انضمام للنادي:
+ 
+        <article class="app-row type-membership">
+          <div class="app-info">
+            <h3 class="app-student">—</h3>
+            <p class="app-meta">—</p>
+          </div>
+          <div class="app-side">
+            <span class="badge badge-member">طلب انضمام للنادي</span>
+            <span class="status">—</span>
+          </div>
+        </article>
+ 
+        قالب طلب تقديم على فرصة:
+ 
+        <article class="app-row type-opportunity">
+          <div class="app-info">
+            <h3 class="app-student">—</h3>
+            <p class="app-meta">—</p>
+          </div>
+          <div class="app-side">
+            <span class="badge badge-apply">طلب تقديم على فرصة</span>
+            <span class="status">—</span>
+          </div>
+        </article>
+      -->
+ 
+    </div>
+  </section>
+ 
+</main>
+
+
+  <!-- ===== Footer (same in both pages) ===== -->
+  <footer class="footer" id="site-footer"></footer>
+
+  <script src="layout.js" defer></script>
+
+</body>
+</html>
